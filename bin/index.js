@@ -1,5 +1,7 @@
-import { lstatSync, existsSync, readFileSync } from "fs";
-import { argv } from "process";
+#!/usr/bin/env node
+'use strict';
+const fs = require("fs");
+const { argv } = require("process");
 
 const buildFilePath = () => {
     const defaultPath = `${process.cwd()}/package.json`;
@@ -7,11 +9,11 @@ const buildFilePath = () => {
 
     // Check that provided path is dir
     try {
-        if (lstatSync(basePath).isDirectory()) {
-            if (basePath.endsWith("/")) {
-                basePath += "package.json";
+        if (fs.lstatSync(basePath).isDirectory()) {
+            if (basePath.endsWith('/')) {
+                basePath += 'package.json';
             } else {
-                basePath += "/package.json";
+                basePath += '/package.json';
             }
         } 
     } catch (error) {
@@ -21,9 +23,9 @@ const buildFilePath = () => {
     }
 
     // Check that provided file exists
-    const isExists = existsSync(basePath);
+    const isExists = fs.existsSync(basePath);
 
-    if (isExists && basePath.endsWith("package.json")) {
+    if (isExists && basePath.endsWith('package.json')) {
         return basePath;
     } else {
         console.log("ERROR");
@@ -36,7 +38,7 @@ const file = buildFilePath();
 
 const logResult = (filePath) => {
     if (argv[2]) {
-        const result = JSON.parse(readFileSync(filePath, "utf-8"));
+        const result = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
         console.dir(result[argv[2]]);
     } else {
         console.log("ERROR");
@@ -45,6 +47,6 @@ const logResult = (filePath) => {
     }
 }
 
-export default (function () {
+module.exports = (function () {
     logResult(file)
 })();
