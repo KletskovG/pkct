@@ -1,5 +1,5 @@
-const fs = require("fs");
-const { argv } = require("process");
+import { lstatSync, existsSync, readFileSync } from "fs";
+import { argv } from "process";
 
 const buildFilePath = () => {
     const defaultPath = `${process.cwd()}/package.json`;
@@ -7,7 +7,7 @@ const buildFilePath = () => {
 
     // Check that provided path is dir
     try {
-        if (fs.lstatSync(basePath).isDirectory()) {
+        if (lstatSync(basePath).isDirectory()) {
             if (basePath.endsWith("/")) {
                 basePath += "package.json";
             } else {
@@ -21,7 +21,7 @@ const buildFilePath = () => {
     }
 
     // Check that provided file exists
-    const isExists = fs.existsSync(basePath);
+    const isExists = existsSync(basePath);
 
     if (isExists && basePath.endsWith("package.json")) {
         return basePath;
@@ -36,7 +36,7 @@ const file = buildFilePath();
 
 const logResult = (filePath) => {
     if (argv[2]) {
-        const result = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const result = JSON.parse(readFileSync(filePath, "utf-8"));
         console.dir(result[argv[2]]);
     } else {
         console.log("ERROR");
@@ -45,6 +45,6 @@ const logResult = (filePath) => {
     }
 }
 
-module.exports = (function () {
+export default (function () {
     logResult(file)
 })();
