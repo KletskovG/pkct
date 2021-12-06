@@ -1,2 +1,2 @@
 # pkginspect
-Inspect field of your package.json
+Inspect fields of your package.json
