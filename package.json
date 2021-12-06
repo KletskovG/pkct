@@ -1,6 +1,6 @@
 {
   "name": "pkginspect",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Inspect fields of your package.json",
   "main": "index.js",
   "scripts": {
