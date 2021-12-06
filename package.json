@@ -1,7 +1,7 @@
 {
   "name": "pkginspect",
-  "version": "1.0.0",
-  "description": "Inspect field of your package.json",
+  "version": "0.0.1",
+  "description": "Inspect fields of your package.json",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
